@@ -16,6 +16,33 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Atlasify - Premium Interactive Map Dashboard",
   description: "A gorgeous, high-performance map dashboard built with MapLibre GL and Next.js.",
+  authors: [{ name: "Your Name" }],
+  openGraph: {
+    title: "Atlasify - Premium Interactive Map Dashboard",
+    description: "A gorgeous, high-performance map dashboard built with MapLibre GL and Next.js.",
+    url: "https://yourusername.github.io/maps",
+    siteName: "Atlasify",
+    images: [
+      {
+        url: "/maps/icon-512.png", // We will need to add an icon later
+        width: 512,
+        height: 512,
+        alt: "Atlasify Map Dashboard",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Atlasify - Premium Interactive Map Dashboard",
+    description: "A gorgeous, high-performance map dashboard built with MapLibre GL and Next.js.",
+    images: ["/maps/icon-512.png"],
+  },
+  appleWebApp: {
+    title: "Atlasify",
+    statusBarStyle: "black-translucent",
+    capable: true,
+  },
 };
 
 export default function RootLayout({
