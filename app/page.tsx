@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "@/components/map/Sidebar";
 import MapContainer from "@/components/map/MapContainer";
 import SearchBar from "@/components/map/SearchBar";
-import WeatherWidget from "@/components/map/WeatherWidget";
 import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
 
 export default function Home() {
@@ -47,9 +46,6 @@ export default function Home() {
       >
         <Sidebar />
       </div>
-
-      {/* Floating Live Weather Widget */}
-      {/* <WeatherWidget /> */}
     </main>
   );
 }

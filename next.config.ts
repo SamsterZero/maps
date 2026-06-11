@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: "/maps", // Set this to your repository name
+  assetPrefix: "/maps", // Set this to your repository name
 };
 
 export default nextConfig;
