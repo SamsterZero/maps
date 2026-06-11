@@ -5,6 +5,7 @@ import Sidebar from "@/components/map/Sidebar";
 import MapContainer from "@/components/map/MapContainer";
 import SearchBar from "@/components/map/SearchBar";
 import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,12 +17,14 @@ export default function Home() {
 
       {/* Floating Search Bar */}
       <div
-        className="absolute top-4 z-30 transition-all duration-300 ease-in-out"
-        style={{
-          left: sidebarOpen ? "calc(24rem + 1.5rem)" : "4rem",
-          right: "auto",
-          width: "22rem",
-        }}
+        className={cn(
+          "absolute top-4 z-30 transition-all duration-300 ease-in-out",
+          // Mobile styling: takes up remaining width next to toggle button
+          "left-[4rem] w-[calc(100%-5rem)]",
+          // Desktop styling: fixed width, dynamic left position based on sidebar
+          "md:w-[22rem]",
+          sidebarOpen ? "md:left-[25.5rem]" : "md:left-[4rem]"
+        )}
       >
         <SearchBar />
       </div>
@@ -37,12 +40,16 @@ export default function Home() {
 
       {/* Overlay Sidebar Panel */}
       <div
-        className={`absolute top-4 left-4 bottom-4 z-30 transition-all duration-300 ease-in-out ${
+        className={cn(
+          "absolute top-[4.5rem] left-4 bottom-4 z-30 transition-all duration-300 ease-in-out",
+          // Mobile styling: almost full width
+          "w-[calc(100%-2rem)]",
+          // Desktop styling: 24rem (96) width
+          "md:w-96",
           sidebarOpen
             ? "opacity-100 translate-x-0 pointer-events-auto"
             : "opacity-0 -translate-x-6 pointer-events-none"
-        }`}
-        style={{ width: "24rem", marginTop: "3.5rem" }}
+        )}
       >
         <Sidebar />
       </div>
