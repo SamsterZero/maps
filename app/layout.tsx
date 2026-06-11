@@ -14,17 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://samsterzero.github.io"),
   title: "Atlasify - Premium Interactive Map Dashboard",
   description: "A gorgeous, high-performance map dashboard built with MapLibre GL and Next.js.",
   authors: [{ name: "Your Name" }],
+  icons: {
+    icon: "/maps/icon-192.png",
+    apple: "/maps/icon-192.png",
+  },
   openGraph: {
     title: "Atlasify - Premium Interactive Map Dashboard",
     description: "A gorgeous, high-performance map dashboard built with MapLibre GL and Next.js.",
-    url: "https://yourusername.github.io/maps",
+    url: "https://samsterzero.github.io/maps",
     siteName: "Atlasify",
     images: [
       {
-        url: "/maps/icon-512.png", // We will need to add an icon later
+        url: "/maps/icon-512.png",
         width: 512,
         height: 512,
         alt: "Atlasify Map Dashboard",
