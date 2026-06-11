@@ -5,7 +5,7 @@ import type { Feature, LineString } from "geojson";
 import Map, { Marker, Source, Layer, MapRef, MapMouseEvent } from "react-map-gl/maplibre";
 import maplibregl from "maplibre-gl";
 import { useMapStore, MapStyleType } from "@/lib/store";
-import { MapPin, Navigation, ZoomIn, ZoomOut } from "lucide-react";
+import { MapPin, Navigation, ZoomIn, ZoomOut, Compass } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Map style JSON sheets from CartoDB
@@ -34,6 +34,7 @@ export default function MapContainer() {
     latitude: 48.8584,
     zoom: 12,
     pitch: 30,
+    bearing: 0,
   });
 
   // Watch flyToTrigger to animate map
@@ -95,6 +96,16 @@ export default function MapContainer() {
       mapRef.current.easeTo({
         zoom: currentZoom + amount,
         duration: 300,
+      });
+    }
+  };
+
+  const handleResetNorth = () => {
+    if (mapRef.current) {
+      mapRef.current.easeTo({
+        bearing: 0,
+        pitch: 0, // Resetting pitch as well for a clean top-down view
+        duration: 500,
       });
     }
   };
@@ -248,12 +259,25 @@ export default function MapContainer() {
       {/* Floating Utility Tools (Bottom Right) */}
       <div className="absolute bottom-6 right-6 z-10 flex flex-col gap-2">
         <button
+          onClick={handleResetNorth}
+          title="Reset North"
+          className="w-10 h-10 rounded-xl bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-900/60 flex items-center justify-center text-zinc-600 hover:text-violet-600 dark:text-zinc-400 dark:hover:text-violet-400 shadow-lg transition-all duration-150"
+        >
+          <Compass 
+            size={20} 
+            style={{ transform: `rotate(-${viewport.bearing || 0}deg)` }} 
+            className="transition-transform duration-75"
+          />
+        </button>
+
+        <button
           onClick={handleLocateMe}
           title="My Location"
           className="w-10 h-10 rounded-xl bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-900/60 flex items-center justify-center text-zinc-600 hover:text-violet-600 dark:text-zinc-400 dark:hover:text-violet-400 shadow-lg hover:scale-105 active:scale-100 transition-all duration-150 group"
         >
           <Navigation size={18} className="group-hover:animate-pulse" />
         </button>
+
         <div className="flex flex-col bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-900/60 rounded-xl shadow-lg overflow-hidden">
           <button
             onClick={() => handleZoom(1)}
